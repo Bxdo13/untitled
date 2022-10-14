@@ -2,13 +2,17 @@ package com.company;
 
 public class Test1 {
     public static void main(String[] args) {
-
     }
-    public static int fact(int number) {
+    public static long fact(long number) {
         if (number == 1) {
             return 1;
         }
-        return number * fact(number - 1);
+        if (number < 0) {
+            number = Math.abs(number);
+
+            return
+                    -1 * (number * fact(number - 1));
+        } else return number * fact(number - 1);
     }
 
     public static int fib(int n) {
@@ -35,12 +39,19 @@ public class Test1 {
     }
 
     public static void reverseNum(int n) {
-        if (n < 10) {
-            System.out.println(n);
+        if ((n < 10 && n>0) || (n<0 && n>-10)) {
+            System.out.println(Math.abs(n));
             return;
         }
-        System.out.print(n % 10);
-        reverseNum(n / 10);
+        else if(n<0 && n<-10) {
+            System.out.print(n % 10);
+            n=Math.abs(n);
+            reverseNum(n / 10);
+        }
+        else{
+            System.out.print(n % 10);
+            reverseNum(n / 10);
+        }
     }
 
     public static void digitsToWords(int number) {
@@ -93,9 +104,15 @@ public class Test1 {
     }
     public static int powerNum(int number,int power){
       if(power!=0){
+          if(number<0 && power%2!=0){
+              number=Math.abs(number);
+              return -(number*(powerNum(number,power-1)));
+          }
+          else
           return number*(powerNum(number,power-1));
       }
       else {
+
           return 1;
       }
     }
